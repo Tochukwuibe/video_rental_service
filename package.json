@@ -1,0 +1,32 @@
+{
+  "name": "vidly",
+  "version": "1.0.0",
+  "description": " backend for a movie rental service",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": " tslint --project tsconfig.json && tsc && nodemon lib/index"
+  },
+  "keywords": [
+    "api",
+    "videos",
+    "movies",
+    "express",
+    "mongodb",
+    "REST"
+  ],
+  "author": "toch",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "joi": "^13.6.0",
+    "mongoose": "^5.2.9"
+  },
+  "devDependencies": {
+    "@types/express": "^4.16.0",
+    "@types/joi": "^13.4.4",
+    "@types/mongoose": "^5.2.7",
+    "tslint": "^5.11.0",
+    "typescript": "^3.0.1"
+  }
+}
