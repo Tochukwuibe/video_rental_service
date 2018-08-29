@@ -4,6 +4,7 @@ import * as mongoose from 'mongoose';
 import { genres } from './routes/genres/genres';
 import { customers } from './routes/customers/customers';
 import { movies } from './routes/movies/movie';
+import { rentals } from './routes/rentals/rentals';
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -18,8 +19,9 @@ app.get('/', (req, res) => {
 
 
 app.use('/api/genres', genres);
-app.use('/api/customers', customers)
-app.use('/api/movies', movies)
+app.use('/api/customers', customers);
+app.use('/api/movies', movies);
+app.use('/api/rentals', rentals);
 
 
 

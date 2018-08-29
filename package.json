@@ -13,13 +13,16 @@
     "movies",
     "express",
     "mongodb",
-    "REST"
+    "REST",
+    "Authenticatio"
   ],
   "author": "toch",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",
+    "fawn": "^2.1.5",
     "joi": "^13.6.0",
+    "joi-objectid": "^2.0.0",
     "mongoose": "^5.2.9"
   },
   "devDependencies": {

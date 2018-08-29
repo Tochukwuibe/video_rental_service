@@ -1,3 +1,4 @@
+import { Genre } from './../../schemas/genres.schema';
 import { Request, Response } from 'express'
 import { Movie, validate } from '../../schemas/movies';
 
@@ -28,7 +29,16 @@ export async function addMovie(req: Request, res: Response) {
 
         let movie = req.body;
         validate(movie);
-        movie = new Movie(movie)
+
+        const genre = await findGenre(movie.genreId) as any;
+
+        movie = new Movie({
+            ...movie, 
+            genre: {
+                _id: genre.id, 
+                name: genre.name
+             }
+        })
         await movie.save();
 
         return res.status(201).send(movie)
@@ -43,8 +53,17 @@ export async function addMovie(req: Request, res: Response) {
 export async function updateMovie(req: Request, res: Response) {
     try {
         let update = req.body;
-        validate(update)
-        const movie = await Movie.findByIdAndUpdate({ _id: req.params.id }, update, { new: true })
+        validate(update);
+
+        const genre = await findGenre(req.body.genreId) as any;
+
+        const movie = await Movie.findByIdAndUpdate({ _id: req.params.id }, {
+            ...update, 
+            genre: {
+                _id: genre.id, 
+                name: genre.name
+             }
+        }, { new: true })
         movie.save()
 
         return res.status(201).send(movie)
@@ -63,4 +82,10 @@ export async function deleteMovie(req: Request, res: Response) {
 
         return res.status(400).send(e.message)
     }
+}
+
+async function findGenre(genreId) {
+    const genre = await Genre.findById(genreId)
+    if(!genre) {throw new Error('No Genre found')}
+    return genre
 }
