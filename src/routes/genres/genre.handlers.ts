@@ -1,11 +1,12 @@
-import {Genre} from '../../schemas/genres.schema'
-import { Request, Response } from 'express';
+import { Genre } from '../../schemas/genres.schema'
+import { Request, Response, NextFunction } from 'express';
 import { validate } from '../../schemas/genres.schema';
 
 
-export async function getGenres(req: Request, res: Response) {
+export async function getGenres(req: Request, res: Response, next: NextFunction) {
+    throw new Error('poop')
     const genres = await Genre.find().sort('name');
-    res.send(genres)
+    res.send(genres);
 }
 
 export async function addGenre(req: Request, res: Response) {
@@ -44,6 +45,8 @@ export async function deleteGenre(req: Request, res: Response) {
 export async function getGnere(req: Request, res: Response) {
     const id = req.params.id;
     const genre = await findGenre(id);
+
+   
 
     if (!genre) { return res.status(404).send('Genre not found') };
 

@@ -1,0 +1,15 @@
+
+{"level":"error","message":"poop"}
+{"level":"error","message":"just because"}
+{"level":"error","message":"Unhandeled rejection"}
+{"level":"error","message":"Unhandeled rejection"}
+{"level":"error","message":"Unhandeled rejection"}
+{"level":"error","message":"bad"}
+{"name":"MongoNetworkError","errorLabels":["TransientTransactionError"],"level":"error","message":"failed to connect to server [localhost:27017] on first connect [MongoNetworkError: connect ECONNREFUSED 127.0.0.1:27017]"}
+{"message":"MongoDB connection established","level":"info"}
+{"message":"MongoDB connection established","level":"info"}
+{"message":"MongoDB connection established","level":"info"}
+{"level":"error","message":"poop"}
+{"message":"MongoDB connection established","level":"info"}
+{"level":"error","message":"poop"}
+{"level":"error","message":"poop"}

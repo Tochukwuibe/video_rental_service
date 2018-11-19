@@ -1,40 +1,45 @@
 import * as  express from 'express';
-import * as mongoose from 'mongoose';
 
-import { genres } from './routes/genres/genres';
-import { customers } from './routes/customers/customers';
-import { movies } from './routes/movies/movie';
-import { rentals } from './routes/rentals/rentals';
+import { routes } from './startup/routes';
+import { connect } from './startup/database';
+import { winstonConfig, handelUncaughtExceptions, unhandledPromiseRejection } from './startup/logging';
+import { validateConfig } from './startup/config';
+
+
 
 const app = express();
 const port = process.env.PORT || 5000;
 
-connect()
 
-app.use(express.json())
+async function startUp() {
+    await connect();
+    winstonConfig()
+    handelUncaughtExceptions();
+    unhandledPromiseRejection();
+    validateConfig();
 
-app.get('/', (req, res) => {
-    res.send('Welcome to vidly')
-})
-
-
-app.use('/api/genres', genres);
-app.use('/api/customers', customers);
-app.use('/api/movies', movies);
-app.use('/api/rentals', rentals);
+    routes(app);
 
 
-
-
-app.listen(port, () => {
-    console.log(`serve listening on port ${port}`)
-}) 
-
-
-
-
-
-async function connect() {
-    await mongoose.connect('mongodb://localhost/vidly', {useNewUrlParser: true});
-    console.log('connected to Mongodb...')
+    app.listen(port, () => {
+        console.log(`serve listening on port ${port}`)
+    })
 }
+
+
+startUp();
+
+// throw new Error('again')
+// Promise.reject(new Error('bad'))
+
+
+
+
+
+
+
+
+
+
+
+
